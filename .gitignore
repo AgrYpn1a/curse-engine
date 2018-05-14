@@ -1,0 +1,7 @@
+# trash files
+*.swp
+*.swo
+
+# executable
+main
+
