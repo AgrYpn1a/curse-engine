@@ -1,7 +1,10 @@
+#include <chrono>
+#include <stdlib.h>
+
 #include "engine.h"
-#include "stdlib.h"
 
 engine::engine() :
+	world(),
 	_void {initscr()},
 	_max_x{getmaxx(stdscr)},
 	_max_y{getmaxy(stdscr)},
@@ -15,6 +18,8 @@ engine::engine() :
 
 	box(_win_main, 0, 0);
 	wrefresh(_win_main);
+
+	start_time = time_passed;
 }
 
 engine::~engine()
@@ -27,8 +32,12 @@ void engine::run()
 	// engine loop
 	while(true)
 	{
+		world::tick();
 		process_events();
 		update();
+
+		for(auto e : entities)
+			e->tick();
 	}
 }
 
@@ -52,6 +61,18 @@ void engine::process_key_events(int ch)
 	{
 		case 'q':
 			this->key_q();
+			break;
+		case KEY_LEFT:
+			this->key_left();
+			break;
+		case KEY_UP:
+			this->key_up();
+			break;
+		case KEY_DOWN:
+			this->key_down();
+			break;
+		case KEY_RIGHT:
+			this->key_right();
 			break;
 		default:
 			break;

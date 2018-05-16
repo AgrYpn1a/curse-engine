@@ -1,29 +1,12 @@
 #include <iostream>
-
-#include "engine.h"
-
-class game : public engine
-{
-	public:
-		game() {}
-		~game() {}
-
-		void update() override
-		{
-
-		}
-
-		void key_q() override
-		{
-			terminate();
-		}
-
-};
+#include "game.h"
 
 int main()
 {
 	game g;
+	g.add_camera();
 	g.run();
+
 
 	return 0;
 }
